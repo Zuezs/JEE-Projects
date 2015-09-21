@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title>First JSF Assignment</title>
+		 <link href="css/style.css" rel="stylesheet"/>
+	</h:head>
+	<h:body>
+		<h:form>
+					<p:messages></p:messages>
+					<p:panelGrid columns="2">
+						<p:outputLabel for="numberOne" value="Number One" />
+						<p:inputText type="number" label="Number One" id="numberOne" required="true"
+							requiredMessage="Number 1 must not be blank"
+							value="#{calcBean.calc.numberOne}" />
+							
+						<p:outputLabel for="numberTwo" value="Number Two" />
+						<p:inputText type="number" label="Number Two" id="numberTwo" required="true"
+							requiredMessage="Number 2 must not be blank"
+							value="#{calcBean.calc.numberTwo}" />
+						
+						<p:selectOneRadio value="#{calcBean.calc.type}">
+							<f:selectItem itemValue="Add" itemLabel="Addition" />
+							<f:selectItem itemValue="Subtract" itemLabel="Subtraction" />
+							<f:selectItem itemValue="Divide" itemLabel="Division" />
+							<f:selectItem itemValue="Multi" itemLabel="Multiply" />
+						</p:selectOneRadio>
+							
+						<p:commandButton value="Submit" action="#{calcBean.calculate}" />
+					
+					</p:panelGrid>
+					
+		</h:form>
+		
+			<h:dataTable value="#{calcBean.list}" var="calc" 
+				styleClass="userTable"
+		        headerClass="userTableHeader"
+		        rowClasses="userTableOddRow,userTableEvenRow">
+			   <h:column>    				
+			      <f:facet name="header">Index</f:facet>    				
+			      #{calc.numId}
+			   </h:column>
+			   <h:column>    				
+			      <f:facet name="header">Number 1</f:facet>    				
+			      #{calc.numberOne}
+			   </h:column>
+			   <h:column>
+			      <f:facet name="header">Number 2</f:facet>
+			      #{calc.numberTwo}
+			   </h:column>
+			   <h:column>
+			      <f:facet name="header">Result</f:facet>
+			      #{calc.result}
+			   </h:column>
+			   <h:column>
+			      <f:facet name="header">Type</f:facet>
+			      #{calc.type}
+			   </h:column>
+			</h:dataTable>
+		
+	</h:body>
+</html>
+	

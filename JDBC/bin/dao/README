@@ -1,0 +1,19 @@
+*****************
+** DAO Pattern **
+*****************
+Definition:
+		Data Access Object
+
+
+Usage: 	To abstract and encapsulate all 
+		access to the data source. The DAO
+		manages the connection with the data
+		source to obtain and store data.
+		
+		The DAO hides the implementation 
+		details	of the data source 
+		(DB, LDAP, etc.), and allows the client
+		or business components to interact
+		with an interface rather than the 
+		data source objects themselves.
+		

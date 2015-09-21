@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+"http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<form-beans>
+		<!-- <form-bean name="orderForm"
+		type="com.eintern.struts.pizzaorderingapp.action.form.OrderForm">
+			<form-property name="name" type="java.lang.String"/>
+			<form-property name="toppings" type="java.lang.String"/>
+			
+		</form-bean> -->
+		
+		<form-bean name="orderForm"
+		type="org.apache.struts.validator.DynaValidatorForm">
+			<form-property name="name" type="java.lang.String"/>
+			<form-property name="toppings" type="java.lang.String"/>
+		</form-bean>
+		
+		<form-bean name="historyForm"
+		type="com.eintern.struts.pizzaorderingapp.action.form.OrderHistoryForm">
+			<form-property name="name" type="java.lang.String"/>
+		</form-bean>
+	</form-beans>
+
+	<action-mappings>
+		<action name="orderForm" 
+				path="/order/submit"
+				input="/index.jsp"
+				validate="true"
+				type="com.eintern.struts.pizzaorderingapp.action.OrderAction"
+		>
+			<forward name="confirmation" path="/WEB-INF/jsp/confirmation.jsp"></forward>
+		</action>
+		<action 
+		name="historyForm"
+		path="/order/history"
+		type="com.eintern.struts.pizzaorderingapp.action.OrderHistoryAction"
+		input="/checkhistory.jsp"
+		validate="true">
+		<forward name="history" path="/WEB-INF/jsp/history.jsp"/>
+		<forward name="vipHistory" path="/WEB-INF/jsp/vipHistory.jsp"></forward>
+		</action>
+	</action-mappings>
+	
+	<message-resources parameter="resources.application"></message-resources>
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames" 
+		value="/WEB-INF/conf/validator-rules.xml, /WEB-INF/conf/validation.xml"/>
+	</plug-in>
+</struts-config>

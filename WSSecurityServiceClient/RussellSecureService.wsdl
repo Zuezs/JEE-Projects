@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://service.soap.training.eintern.com" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://service.soap.training.eintern.com">
+    <wsp:Policy xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" >
+        <wsp:ExactlyOne>
+            <wsp:All>
+                <sp:TransportBinding xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+                    <wsp:Policy>
+                        <sp:TransportToken>
+                            <wsp:Policy/>
+                        </sp:TransportToken>
+                        <sp:AlgorithmSuite>
+                            <wsp:Policy>
+                                <sp:Basic256/>
+                            </wsp:Policy>
+                        </sp:AlgorithmSuite>
+                        <sp:Layout>
+                            <wsp:Policy>
+                                <sp:Lax/>
+                            </wsp:Policy>
+                        </sp:Layout>
+                    </wsp:Policy>
+                </sp:TransportBinding>
+                <sp:SupportingTokens xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+                    <wsp:Policy>
+                        <sp:UsernameToken sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient"/>
+                    </wsp:Policy>
+                </sp:SupportingTokens>
+            </wsp:All>
+        </wsp:ExactlyOne>
+    </wsp:Policy>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.soap.training.eintern.com">
+            <xs:element name="processMessage">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="message" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="processMessageResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addInts">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="var1" type="xs:int"/>
+                        <xs:element minOccurs="0" name="var2" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="addIntsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="addIntsRequest">
+        <wsdl:part name="parameters" element="ns:addInts"/>
+    </wsdl:message>
+    <wsdl:message name="addIntsResponse">
+        <wsdl:part name="parameters" element="ns:addIntsResponse"/>
+    </wsdl:message>
+    <wsdl:message name="processMessageRequest">
+        <wsdl:part name="parameters" element="ns:processMessage"/>
+    </wsdl:message>
+    <wsdl:message name="processMessageResponse">
+        <wsdl:part name="parameters" element="ns:processMessageResponse"/>
+    </wsdl:message>
+    <wsdl:portType xmlns:wsp="http://www.w3.org/ns/ws-policy" name="RussellSecureServicePortType">
+        <wsdl:operation name="addInts">
+            <wsdl:input message="ns:addIntsRequest" wsaw:Action="urn:addInts"/>
+            <wsdl:output message="ns:addIntsResponse" wsaw:Action="urn:addIntsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="processMessage">
+            <wsdl:input message="ns:processMessageRequest" wsaw:Action="urn:processMessage"/>
+            <wsdl:output message="ns:processMessageResponse" wsaw:Action="urn:processMessageResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="RussellSecureServiceSoap11Binding" type="ns:RussellSecureServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="addInts">
+            <soap:operation soapAction="urn:addInts" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="processMessage">
+            <soap:operation soapAction="urn:processMessage" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="RussellSecureServiceSoap12Binding" type="ns:RussellSecureServicePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="addInts">
+            <soap12:operation soapAction="urn:addInts" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="processMessage">
+            <soap12:operation soapAction="urn:processMessage" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="RussellSecureServiceHttpBinding" type="ns:RussellSecureServicePortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="addInts">
+            <http:operation location="addInts"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="processMessage">
+            <http:operation location="processMessage"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="parameters"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="RussellSecureService">
+        <wsdl:port name="RussellSecureServiceHttpSoap11Endpoint" binding="ns:RussellSecureServiceSoap11Binding">
+            <soap:address location="http://192.168.60.91:8080/WSSecurityServiceDemo/services/RussellSecureService.RussellSecureServiceHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="RussellSecureServiceHttpSoap12Endpoint" binding="ns:RussellSecureServiceSoap12Binding">
+            <soap12:address location="http://192.168.60.91:8080/WSSecurityServiceDemo/services/RussellSecureService.RussellSecureServiceHttpSoap12Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="RussellSecureServiceHttpEndpoint" binding="ns:RussellSecureServiceHttpBinding">
+            <http:address location="http://192.168.60.91:8080/WSSecurityServiceDemo/services/RussellSecureService.RussellSecureServiceHttpEndpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

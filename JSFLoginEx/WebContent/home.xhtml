@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head></h:head>
+	<h:body>
+
+		<ui:composition template="baseTemplate.xhtml">
+			<ui:define name="body">
+			Welcome!!! <br/>
+		
+				<h:form id="userForm">
+					<p:messages></p:messages>
+					<p:panelGrid columns="2">
+						<p:outputLabel for="username" value="Username" />
+						<p:inputText label="Username" id="username" required="true"
+							value="#{userBean.user.username}" />
+							
+						<p:outputLabel for="password" value="Password" />
+						<p:password label="Password" id="password" required="true" 
+							validatorMessage="Password must be greater than 3 but less than 28 characters."
+							requiredMessage="Password must not be blank"
+							value="#{userBean.user.password}" />
+							
+						<p:commandButton value="Login" action="#{userBean.login}" update="userForm" />
+						<p:commandButton value="Register" action="#{userBean.register}" update="userForm" />
+					
+					</p:panelGrid>
+					
+				</h:form>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</html>
